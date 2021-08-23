@@ -1,18 +1,18 @@
-import { SET_SUB_MENU } from '../actions/app';
+import { SET_ACCOUNT } from '../actions/app';
 import { AppState } from '../types';
 
 const defaultState: AppState = {
-    subMenu: [],
+    account: {},
 };
 
 const appReducer = (state = defaultState, action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case SET_SUB_MENU:
+        case SET_ACCOUNT:
             return {
                 ...state,
-                subMenu: payload,
+                account: payload,
             };
 
         default:

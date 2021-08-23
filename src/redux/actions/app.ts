@@ -1,6 +1,6 @@
-export const SET_SUB_MENU = 'SET_SUB_MENU';
+export const SET_ACCOUNT = 'SET_ACCOUNT';
 
-export const setSubMenu = subMenu => ({
-    type: SET_SUB_MENU,
-    payload: subMenu,
+export const setAccount = account => ({
+    type: SET_ACCOUNT,
+    payload: account,
 });

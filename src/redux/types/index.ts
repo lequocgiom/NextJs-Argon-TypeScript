@@ -1,5 +1,5 @@
 export interface AppState {
-    subMenu: any[];
+    account: Object;
 }
 
 export interface StoreState {
