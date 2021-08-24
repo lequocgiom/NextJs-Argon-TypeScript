@@ -1,17 +1,17 @@
 export const CHART = {
-    GET: {
-        DETAIL: '/chart/detail',
-        LIST: '/chart/list',
-    },
+  GET: {
+    DETAIL: '/chart/detail',
+    LIST: '/chart/list',
+  },
 };
 
 export const TABLE = {
-    GET: '/table',
+  GET: '/table',
 };
 
 const API = {
-    CHART,
-    TABLE,
+  CHART,
+  TABLE,
 };
 
 export default API;

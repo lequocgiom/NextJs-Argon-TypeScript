@@ -1,7 +1,7 @@
 export interface AppState {
-    account: Object;
+  account: Object;
 }
 
 export interface StoreState {
-    app: AppState;
+  app: AppState;
 }

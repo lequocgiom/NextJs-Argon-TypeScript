@@ -13,43 +13,49 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'assets/scss/nextjs-argon-dashboard.scss';
 
 Router.events.on('routeChangeStart', url => {
-    console.log(`Loading: ${url}`);
-    document.body.classList.add('body-page-transition');
-    ReactDOM.render(<PageChange path={url} />, document.getElementById('page-transition'));
+  console.log(`Loading: ${url}`);
+  document.body.classList.add('body-page-transition');
+  ReactDOM.render(
+    <PageChange path={url} />,
+    document.getElementById('page-transition'),
+  );
 });
 Router.events.on('routeChangeComplete', () => {
-    ReactDOM.unmountComponentAtNode(document.getElementById('page-transition'));
-    document.body.classList.remove('body-page-transition');
+  ReactDOM.unmountComponentAtNode(document.getElementById('page-transition'));
+  document.body.classList.remove('body-page-transition');
 });
 Router.events.on('routeChangeError', () => {
-    ReactDOM.unmountComponentAtNode(document.getElementById('page-transition'));
-    document.body.classList.remove('body-page-transition');
+  ReactDOM.unmountComponentAtNode(document.getElementById('page-transition'));
+  document.body.classList.remove('body-page-transition');
 });
 
 interface CustomAppProps extends Omit<AppProps, 'Component'> {
-    Component: AppProps['Component'] & { layout: JSX.Element };
+  Component: AppProps['Component'] & { layout: JSX.Element };
 }
 
-export default function MevDashboardApp({ Component, pageProps }: CustomAppProps) {
-    const Layout = Component.layout || (({ children }) => <>{children}</>);
+export default function MevDashboardApp({
+  Component,
+  pageProps,
+}: CustomAppProps) {
+  const Layout = Component.layout || (({ children }) => <>{children}</>);
 
-    return (
-        <React.Fragment>
-            <Head>
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1, shrink-to-fit=no"
-                />
-                <title>Mev Dashboard</title>
-                <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-            </Head>
-            <Provider store={store}>
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </Provider>
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <title>Mev Dashboard</title>
+        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+      </Head>
+      <Provider store={store}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
+    </React.Fragment>
+  );
 }
 
 // static async getInitialProps({ Component, router, ctx }) {
