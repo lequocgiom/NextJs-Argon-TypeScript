@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // node.js library that concatenates classes (strings)
 import classnames from 'classnames';
 // javascipt plugin for creating charts
@@ -31,6 +31,7 @@ import {
 } from '../../variables/charts.js';
 
 import Header from 'src/components/Headers/Header.js';
+import { getAllTxs } from 'src/services/transaction/transaction.service.ts';
 
 const Dashboard = props => {
   const [activeNav, setActiveNav] = React.useState(1);
@@ -45,6 +46,10 @@ const Dashboard = props => {
     setActiveNav(index);
     setChartExample1Data('data' + index);
   };
+
+  useEffect(() => {
+    getAllTxs('awdawdawd');
+  }, []);
   return (
     <>
       <Header />

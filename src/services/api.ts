@@ -1,6 +1,6 @@
 // api.ts
 
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 enum StatusCode {
   Unauthorized = 401,
@@ -10,16 +10,15 @@ enum StatusCode {
 }
 
 const headers: Readonly<Record<string, string | boolean>> = {
-  Accept: "application/json",
-  "Content-Type": "application/json; charset=utf-8",
-  "Access-Control-Allow-Credentials": true,
-  "X-Requested-With": "XMLHttpRequest",
+  Accept: 'application/json',
+  'Content-Type': 'application/json; charset=utf-8',
+  'Access-Control-Allow-Credentials': true,
+  'X-Requested-With': 'XMLHttpRequest',
 };
-
 
 const injectToken = (config: AxiosRequestConfig): AxiosRequestConfig => {
   try {
-    const token = localStorage.getItem("accessToken");
+    const token = localStorage.getItem('accessToken');
 
     if (token != null) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -39,37 +38,42 @@ class Api {
 
   initApi() {
     const api = axios.create({
-      baseURL: `${process.env.METHOD}://${process.env.API_URL};${process.env.API_PORT}`,
+      baseURL: `${process.env.NEXT_PUBLIC_METHOD}://${process.env.NEXT_PUBLIC_API_URL}:${process.env.NEXT_PUBLIC_API_PORT}`,
       headers,
       withCredentials: true,
     });
 
-    api.interceptors.request.use(injectToken, (error) => Promise.reject(error));
+    api.interceptors.request.use(injectToken, error => Promise.reject(error));
 
     api.interceptors.response.use(
-      (response) => response,
-      (error) => {
+      response => response,
+      error => {
         const { response } = error;
         return this.handleError(response);
-      }
+      },
     );
 
     this.instance = api;
     return api;
   }
 
-  request<T = any, R = AxiosResponse<T>>(config: AxiosRequestConfig): Promise<R> {
+  request<T = any, R = AxiosResponse<T>>(
+    config: AxiosRequestConfig,
+  ): Promise<R> {
     return this.api.request(config);
   }
 
-  get<T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig): Promise<R> {
+  get<T = any, R = AxiosResponse<T>>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ): Promise<R> {
     return this.api.get<T, R>(url, config);
   }
 
   post<T = any, R = AxiosResponse<T>>(
     url: string,
     data?: T,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<R> {
     return this.api.post<T, R>(url, data, config);
   }
@@ -77,12 +81,15 @@ class Api {
   put<T = any, R = AxiosResponse<T>>(
     url: string,
     data?: T,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<R> {
     return this.api.put<T, R>(url, data, config);
   }
 
-  delete<T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig): Promise<R> {
+  delete<T = any, R = AxiosResponse<T>>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ): Promise<R> {
     return this.api.delete<T, R>(url, config);
   }
 

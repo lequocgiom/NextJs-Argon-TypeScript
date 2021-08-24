@@ -30,7 +30,7 @@ Router.events.on('routeChangeError', () => {
 });
 
 interface CustomAppProps extends Omit<AppProps, 'Component'> {
-  Component: AppProps['Component'] & { layout: JSX.Element };
+  Component: AppProps['Component'] & { layout: React.ElementType };
 }
 
 export default function MevDashboardApp({
